@@ -1,0 +1,72 @@
+package com.stackroute.activitystream;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.stackroute.activitystream.dao.MessageDAO;
+import com.stackroute.activitystream.model.Message;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+public class MessageTest {
+
+	// @Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+	private Message message;
+
+	@Autowired
+	MessageDAO messageDAO;
+
+	@Before
+	public void init() {
+		message = new Message();
+	}
+
+	// @Test
+	public void sendMessageToUserTest() {
+		message.setContent("first message");
+		message.setMessageType("text");
+		message.setSenderId("niyaz.ahmed@niit.com");
+		assertEquals("message send", true, messageDAO.sendMessageToUser("niyaz.ahmed@niit.com", message));
+
+	}
+
+	@Test
+	public void sendMessageToCircleTest() {
+		message.setContent("This is my First Message");
+		message.setMessageType("Test");
+		message.setSenderId("xyz@gmail.com");
+		assertEquals("message send", true, messageDAO.sendMessageToCircle(2, message));
+
+	}
+
+	// @Test
+	public void getMessagesByUserTest() {
+		List<Message> allUserMessages;
+		allUserMessages = messageDAO.getMessagesByUser("qwerty@niit.com");
+		assertNotNull(allUserMessages);
+		System.out.println(allUserMessages);
+	}
+
+	// @Test
+	public void getMessagesByCircleTest() {
+		List<Message> allCircleMessages;
+		allCircleMessages = messageDAO.getMessagesByCircle(5);
+		assertNotNull(allCircleMessages);
+		System.out.println(allCircleMessages);
+	}
+}

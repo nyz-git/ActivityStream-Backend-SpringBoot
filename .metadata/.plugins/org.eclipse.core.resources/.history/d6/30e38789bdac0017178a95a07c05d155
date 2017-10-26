@@ -1,0 +1,11 @@
+package com.stackroute.activitystream.dao;
+
+public interface MessageDAO {
+	boolean sendMessageToCircle(int circleId, Message message);
+
+	boolean sendMessageToUser(String emailId, Message message);
+
+	List<Message> getMessagesByUser(String emailId);
+
+	List<Message> getMessagesByCircle(int circleId);
+}
