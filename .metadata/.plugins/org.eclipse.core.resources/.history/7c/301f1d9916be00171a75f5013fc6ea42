@@ -1,0 +1,14 @@
+package com.stackroute.activitystream;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+@SpringBootApplication
+@EntityScan(basePackages = { "com.stackroute.activitystream" })
+public class CircleServicesApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(CircleServicesApplication.class, args);
+	}
+}
